@@ -1,0 +1,372 @@
+set nocompatible        " Must be first line
+
+" The next three lines ensure that the ~/.vim/bundle/ system works
+filetype on
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#rc()
+
+" Load bundles
+  " DEPS
+  Bundle 'gmarik/Vundle.vim'
+  Bundle 'MarcWeber/vim-addon-mw-utils'
+  Bundle 'tomtom/tlib_vim'
+
+  " General
+  Bundle 'altercation/vim-colors-solarized'
+  Bundle 'spf13/vim-colors'
+  Bundle 'tpope/vim-surround'
+  Bundle 'kien/ctrlp.vim'
+  Bundle 'Raimondi/delimitMate'
+  Bundle 'Lokaltog/vim-powerline'
+  Bundle 'godlygeek/csapprox'
+  Bundle 'flazz/vim-colorschemes'
+  Bundle 'myusuf3/numbers.vim'
+
+  " General Programming
+  Bundle 'scrooloose/syntastic'
+  Bundle 'tpope/vim-fugitive'
+  Bundle 'scrooloose/nerdcommenter'
+  Bundle 'godlygeek/tabular'
+  Bundle "pangloss/vim-javascript"
+  Bundle 'scrooloose/nerdtree'
+  Bundle 'mattn/emmet-vim'
+  Bundle 'kchmck/vim-coffee-script'
+"  Bundle 'klen/python-mode.git'
+ Bundle 'Valloric/YouCompleteMe'
+ Bundle 'mustache/vim-mustache-handlebars'
+ Bundle 'Yggdroot/indentLine'
+  "Bundle 'nathanaelkane/vim-indent-guides'
+ Bundle 'terryma/vim-multiple-cursors'
+ Bundle 'SirVer/ultisnips'
+ Bundle 'honza/vim-snippets'
+ Bundle 'christoomey/vim-tmux-navigator'
+ Bundle 'mkitt/tabline.vim'
+  
+  " General
+  imap jk <Esc>
+  set synmaxcol=200
+
+  "set t_Co=256
+  set background=dark         " Assume a dark background
+  filetype plugin indent on   " Automatically detect file types.
+  syntax on                   " Syntax highlighting
+  set mouse=a                 " Automatically enable mouse usage
+  set mousehide               " Hide the mouse cursor while typing
+  set nobackup
+  set nowritebackup
+  set noswapfile
+  scriptencoding utf-8
+  autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif " Always switch to the current file directory 
+
+  set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+  set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+  set virtualedit=onemore             " Allow for cursor beyond last character
+  set history=1000                    " Store a ton of history (default is 20)
+  set spell                           " Spell checking on
+  set hidden                          " Allow buffer switching without saving
+
+" }
+  " Use system clipboard as default registers
+  set clipboard=unnamed
+
+" Vim UI {
+
+  if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans=1
+    let g:solarized_contrast="normal"
+    let g:solarized_visibility="normal"
+    color solarized             " Load a colorscheme
+  endif
+
+  "let g:solarized_termtrans=1
+  "let g:solarized_contrast="high"
+  "let g:solarized_visibility="high"
+  set tabpagemax=15               " Only show 15 tabs
+  set showmode                    " Display the current mode
+
+  set cursorline                  " Highlight current line
+
+  highlight clear SignColumn      " SignColumn should match background for
+                                  " things like vim-gitgutter
+
+  if has('cmdline_info')
+    set ruler                   " Show the ruler
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
+    set showcmd                 " Show partial commands in status line and
+                                    " Selected characters/lines in visual mode
+  endif
+
+  if has('statusline')
+    set laststatus=2
+
+    " Broken down into easily includeable segments
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+    set statusline+=%{fugitive#statusline()} " Git Hotness
+    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+  endif
+
+  set backspace=indent,eol,start  " Backspace for dummies
+  set linespace=0                 " No extra spaces between rows
+  set nu                          " Line numbers on
+  set showmatch                   " Show matching brackets/parenthesis
+  set incsearch                   " Find as you type search
+  set hlsearch                    " Highlight search terms
+  set winminheight=0              " Windows can be 0 line high
+  set ignorecase                  " Case insensitive search
+  set smartcase                   " Case sensitive when uc present
+  set wildmenu                    " Show list instead of just completing
+  set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+  set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
+  set scrolljump=5                " Lines to scroll when cursor leaves screen
+  set scrolloff=3                 " Minimum lines to keep above and below cursor
+  set foldenable                  " Auto fold code
+  set list
+
+  " List chars
+  set listchars=""          " Reset the listchars
+  set listchars=tab:\ \     " a tab should display as "  ", trailing whitespace as "."
+  set listchars+=trail:.    " show trailing spaces as dots
+  set listchars+=extends:>  " The character to show in the last column when wrap is
+                            " off and the line continues beyond the right of the screen
+  set listchars+=precedes:< " The character to show in the last column when wrap is
+                            " off and the line continues beyond the right of the screen
+
+" } End UI
+  
+" Formatting {
+
+  set nowrap                      " Wrap long lines
+  set autoindent                  " Indent at the same level of the previous line
+  set shiftwidth=2                " Use indents of 2 spaces
+  set expandtab                   " Tabs are spaces, not tabs
+  set tabstop=2                   " An indentation every two columns
+  set softtabstop=2               " Let backspace delete indent
+  "set matchpairs+=<:>             " Match, to be used with %
+  "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
+
+" }
+
+" Key (re)Mappings {
+
+  let mapleader = ','
+
+  " Easier moving in tabs and windows
+  map <C-J> <C-W>j
+  map <C-K> <C-W>k
+  map <C-L> <C-W>l
+  map <C-H> <C-W>h
+
+  " Wrapped lines goes down/up to next row, rather than next line in file.
+  nnoremap j gj
+  nnoremap k gk
+
+  " The following two lines conflict with moving to top and
+  " bottom of the screen
+  map <S-H> gT
+  map <S-L> gt
+
+  " Stupid shift key fixes
+  command! -bang -nargs=* -complete=file E e<bang> <args>
+  command! -bang -nargs=* -complete=file W w<bang> <args>
+  command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+  command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+  command! -bang Wa wa<bang>
+  command! -bang WA wa<bang>
+  command! -bang Q q<bang>
+  command! -bang QA qa<bang>
+  command! -bang Qa qa<bang>
+  cmap Tabe tabe
+
+  " Yank from the cursor to the end of the line, to be consistent with C and D.
+  nnoremap Y y$
+
+  " Shortcuts
+  " Change Working Directory to that of the current file
+  cmap cwd lcd %:p:h
+  cmap cd. lcd %:p:h
+
+  " Visual shifting (does not exit Visual mode)
+  vnoremap < <gv
+  vnoremap > >gv
+
+  " Fix home and end keybindings for screen, particularly on mac
+  " - for some reason this fixes the arrow keys too. huh.
+  map [F $
+  imap [F $
+  map [H g0
+  imap [H g0
+
+  imap jk <Esc>
+
+  " For when you forget to sudo.. Really Write the file.
+  cmap w!! w !sudo tee % >/dev/null
+
+  " Some helpers to edit mode
+  " http://vimcasts.org/e/14
+  cnoremap %% <C-R>=expand('%:h').'/'<cr>
+  map <leader>ew :e %%
+  map <leader>es :sp %%
+  map <leader>ev :vsp %%
+  map <leader>et :tabe %%
+
+  " Easier horizontal scrolling
+  map zl zL
+  map zh zH
+
+  " Last tab binding
+  let g:lasttab = 1
+  nmap <c-w>; :exe "tabn ".g:lasttab<cr>
+  au TabLeave * let g:lasttab = tabpagenr()
+
+  " Don't move on *
+  nnoremap * *<c-o>
+
+  " Keep search matches in the middle of the window.
+  nnoremap n nzzzv
+  nnoremap N Nzzzv
+" }
+
+  """""""""""""""""
+  """"""""PLUGINS
+  """""""""""""""""
+  " Ultisnip
+  "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+  let g:UltiSnipsExpandTrigger="<c-f>"
+  let g:UltiSnipsJumpForwardTrigger="<c-b>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+  " delimitMat
+  let delimitMate_quotes = "\" \'"
+  let delimitMate_smart_quotes = 0
+
+  " NerdTree shortcut
+  nnoremap <leader>d :NERDTreeToggle<cr>
+  let NERDTreeIgnore = ['\.pyc$']
+  let NERDTreeShowHidden = 1
+
+  " Powerline
+  let g:Powerline_symbols='fancy'
+  let g:Powerline_symbols = 'unicode'
+
+  " zencoding {
+    let g:user_emmet_leader_key = '<c-g>'
+  " }
+  
+  " indentline
+  nnoremap <leader>f :IndentLinesToggle<cr>
+  "let g:indentLine_char = '︙'
+  let g:indentLine_faster = 1
+  let g:indentLine_enabled = 0
+
+  " CtrlP
+  let g:ctrlp_switch_buffer = 0
+  let g:ctrlp_working_path_mode = 'r'
+  nnoremap <silent> <D-t> :CtrlP<CR>
+  nnoremap <silent> <D-r> :CtrlPMRU<CR>
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+    \ 'file': '\.exe$\|\.so$\|\.dll$'
+  \ }
+  let g:ctrlp_user_command = {
+    \ 'types': {
+      \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
+      \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+    \ 'fallback': 'find %s -type f'
+  \ }
+
+  " Tabularize {
+    nmap <Leader>a& :Tabularize /&<CR>
+    vmap <Leader>a& :Tabularize /&<CR>
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:<CR>
+    vmap <Leader>a: :Tabularize /:<CR>
+    nmap <Leader>a:: :Tabularize /:\zs<CR>
+    vmap <Leader>a:: :Tabularize /:\zs<CR>
+    nmap <Leader>a, :Tabularize /,<CR>
+    vmap <Leader>a, :Tabularize /,<CR>
+    nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+    vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+    nmap <Leader>a- :Tabularize /=><CR>
+    vmap <Leader>a- :Tabularize /=><CR>
+  " }
+
+  " Tabline modifications
+  "if has('gui')
+    "set guioptions-=e
+  "endif
+
+  hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
+  hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
+  hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
+
+  if has('gui_running')
+   set guifont=Monaco:h12    " set fonts for gui vim
+   "set transparency=5        " set transparent window
+   set guioptions=egmrt  " hide the gui menubar
+  endif
+  "if exists("+showtabline")
+    "function! MyTabLine()
+      "let s = ''
+      "let t = tabpagenr()
+      "let i = 1
+      "while i <= tabpagenr('$')
+        "let buflist = tabpagebuflist(i)
+        "let winnr = tabpagewinnr(i)
+        "let s .= '%' . i . 'T'
+        "let s .= (i == t ? '%1*' : '%2*')
+        "let s .= ' '
+        "let s .= i . ':'
+        "let s .= winnr . '/' . tabpagewinnr(i,'$')
+        "let s .= ' %*'
+        "let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+        "let bufnr = buflist[winnr - 1]
+        "let file = bufname(bufnr)
+        "let buftype = getbufvar(bufnr, 'buftype')
+        "if buftype == 'nofile'
+          "if file =~ '\/.'
+            "let file = substitute(file, '.*\/\ze.', '', '')
+          "endif
+        "else
+          "let file = fnamemodify(file, ':p:t')
+        "endif
+        "if file == ''
+          "let file = '[No Name]'
+        "endif
+        "let s .= file
+        "let i = i + 1
+      "endwhile
+      "let s .= '%T%#TabLineFill#%='
+      "let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+      "return s
+    "endfunction
+    "set stal=2
+    "set tabline=%!MyTabLine()
+  "endif
+
+  " Fugitive {
+    nnoremap <silent> <leader>gs :Gstatus<CR>
+    nnoremap <silent> <leader>gd :Gdiff<CR>
+    nnoremap <silent> <leader>gc :Gcommit<CR>
+    nnoremap <silent> <leader>gb :Gblame<CR>
+    nnoremap <silent> <leader>gl :Glog<CR>
+    nnoremap <silent> <leader>gp :Git push<CR>
+  "}
+
+    "vim-tmux-navigator
+
+  " Don't allow any default key-mappings.
+  let g:tmux_navigator_no_mappings = 1
+
+  " Re-enable tmux_navigator.vim default bindings, minus <c-\>.
+
+  nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+  nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+  nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+  nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
