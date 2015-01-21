@@ -70,6 +70,16 @@ call vundle#rc()
   " Use system clipboard as default registers
   set clipboard=unnamed
 
+  " Paste mode
+  nnoremap <leader>p :set paste<cr>
+  nnoremap <leader>np :set nopaste<cr>
+
+  " Paste form clipboard register
+  nnoremap <leader>P "+P
+
+  nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+  nnoremap <leader>sv :source $MYVIMRC<cr>
+
 " Vim UI {
 
   if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
@@ -80,9 +90,6 @@ call vundle#rc()
     color solarized             " Load a colorscheme
   endif
 
-  "let g:solarized_termtrans=1
-  "let g:solarized_contrast="high"
-  "let g:solarized_visibility="high"
   set tabpagemax=15               " Only show 15 tabs
   set showmode                    " Display the current mode
 
