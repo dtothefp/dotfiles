@@ -18,7 +18,8 @@ call vundle#rc()
   Bundle 'tpope/vim-surround'
   Bundle 'kien/ctrlp.vim'
   Bundle 'Raimondi/delimitMate'
-  Bundle 'Lokaltog/vim-powerline'
+  "Bundle 'Lokaltog/vim-powerline'
+  Bundle 'bling/vim-airline'
   Bundle 'godlygeek/csapprox'
   Bundle 'flazz/vim-colorschemes'
   Bundle 'myusuf3/numbers.vim'
@@ -30,19 +31,22 @@ call vundle#rc()
   Bundle 'godlygeek/tabular'
   Bundle "pangloss/vim-javascript"
   Bundle 'scrooloose/nerdtree'
+  Bundle 'jistr/vim-nerdtree-tabs'
   Bundle 'mattn/emmet-vim'
   Bundle 'kchmck/vim-coffee-script'
-"  Bundle 'klen/python-mode.git'
+  "Bundle 'Shougo/neocomplete.vim'
  Bundle 'Valloric/YouCompleteMe'
  Bundle 'mustache/vim-mustache-handlebars'
  Bundle 'Yggdroot/indentLine'
-  "Bundle 'nathanaelkane/vim-indent-guides'
  Bundle 'terryma/vim-multiple-cursors'
  Bundle 'SirVer/ultisnips'
  Bundle 'honza/vim-snippets'
  Bundle 'christoomey/vim-tmux-navigator'
  Bundle 'mkitt/tabline.vim'
-  
+ Bundle 'gcmt/taboo.vim'
+
+  "let g:ycm_path_to_python_interpreter = '/Users/dfox-powell/dev/optimizely/optimizely/out/python'
+
   " General
   imap jk <Esc>
   set synmaxcol=200
@@ -177,6 +181,10 @@ call vundle#rc()
   map <S-H> gT
   map <S-L> gt
 
+  " Resize splits
+   nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+   nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>)
+
   " Stupid shift key fixes
   command! -bang -nargs=* -complete=file E e<bang> <args>
   command! -bang -nargs=* -complete=file W w<bang> <args>
@@ -241,6 +249,48 @@ call vundle#rc()
   """""""""""""""""
   """"""""PLUGINS
   """""""""""""""""
+  " Neocompleteme
+  "let g:neocomplete#enable_at_startup = 1
+
+  "" Use smartcase.
+	"let g:neocomplete#enable_smart_case = 1
+
+	"" Set minimum syntax keyword length.
+	"let g:neocomplete#sources#syntax#min_keyword_length = 3
+	"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+  "" Define dictionary.
+    "let g:neocomplete#sources#dictionary#dictionaries = {
+        "\ 'default' : '',
+        "\ 'vimshell' : $HOME.'/.vimshell_hist',
+        "\ 'scheme' : $HOME.'/.gosh_completions'
+        "\ }
+
+	"" Define keyword.
+	"if !exists('g:neocomplete#keyword_patterns')
+			"let g:neocomplete#keyword_patterns = {}
+	"endif
+
+	"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  "" Recommended key-mappings.
+	"" <CR>: close popup and save indent.
+	"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+	"function! s:my_cr_function()
+		"return neocomplete#close_popup() . "\<CR>"
+		"" For no inserting <CR> key.
+		""return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+	"endfunction
+	"" <TAB>: completion.
+	"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+	"" <C-h>, <BS>: close popup and delete backword char.
+	"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+	"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+	"inoremap <expr><C-y>  neocomplete#close_popup()
+	"inoremap <expr><C-e>  neocomplete#cancel_popup()
+	" Close popup by <Space>.
+	"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
   " Ultisnip
   "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
   let g:UltiSnipsExpandTrigger="<c-f>"
@@ -252,14 +302,32 @@ call vundle#rc()
   let delimitMate_smart_quotes = 0
 
   " NerdTree shortcut
-  nnoremap <leader>d :NERDTreeToggle<cr>
+  nnoremap <leader>d :NERDTreeTabsToggle<cr>
   let NERDTreeIgnore = ['\.pyc$']
   let NERDTreeShowHidden = 1
 
   " Powerline
-  let g:Powerline_symbols='fancy'
-  let g:Powerline_symbols = 'unicode'
+  "let g:Powerline_symbols='fancy'
+  "let g:Powerline_symbols = 'unicode'
+  "Taboo
+  set sessionoptions+=tabpages,globals
+  "let g:taboo_tab_format='%a%m'
+  """"""""""""""""""""""""""""""
+  " airline
+  """"""""""""""""""""""""""""""
+  let g:airline_theme             = 'powerlineish'
+  let g:airline_enable_branch     = 1
+  let g:airline_enable_syntastic  = 1
 
+  " vim-powerline symbols
+  let g:airline_left_sep          = '⮀'
+  let g:airline_left_alt_sep      = '⮁'
+  let g:airline_right_sep         = '⮂'
+  let g:airline_right_alt_sep     = '⮃'
+  let g:airline_branch_prefix     = '⭠'
+  let g:airline_readonly_symbol   = '⭤'
+  let g:airline_linecolumn_prefix = '⭡'
+  
   " zencoding {
     let g:user_emmet_leader_key = '<c-g>'
   " }
