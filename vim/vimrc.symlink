@@ -20,6 +20,7 @@ call vundle#rc()
   Bundle 'Raimondi/delimitMate'
   "Bundle 'Lokaltog/vim-powerline'
   Bundle 'bling/vim-airline'
+  Bundle 'ntpeters/vim-better-whitespace'
   Bundle 'godlygeek/csapprox'
   Bundle 'flazz/vim-colorschemes'
   Bundle 'myusuf3/numbers.vim'
@@ -61,7 +62,7 @@ call vundle#rc()
   set nowritebackup
   set noswapfile
   scriptencoding utf-8
-  autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif " Always switch to the current file directory 
+  autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif " Always switch to the current file directory
 
   set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
   set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
@@ -148,7 +149,7 @@ call vundle#rc()
                             " off and the line continues beyond the right of the screen
 
 " } End UI
-  
+
 " Formatting {
 
   set nowrap                      " Wrap long lines
@@ -315,23 +316,24 @@ call vundle#rc()
   """"""""""""""""""""""""""""""
   " airline
   """"""""""""""""""""""""""""""
-  let g:airline_theme             = 'powerlineish'
-  let g:airline_enable_branch     = 1
-  let g:airline_enable_syntastic  = 1
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
 
-  " vim-powerline symbols
-  let g:airline_left_sep          = '⮀'
-  let g:airline_left_alt_sep      = '⮁'
-  let g:airline_right_sep         = '⮂'
-  let g:airline_right_alt_sep     = '⮃'
-  let g:airline_branch_prefix     = '⭠'
-  let g:airline_readonly_symbol   = '⭤'
-  let g:airline_linecolumn_prefix = '⭡'
-  
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme = 'powerlineish'
+  let g:airline#extensions#branch#enabled = 1
+  let g:airline#extensions#syntastic#enabled = 1
+  let g:airline#extensions#tmuxline#enabled = 0
+
   " zencoding {
     let g:user_emmet_leader_key = '<c-g>'
   " }
-  
+
+  " trimwhitespace
+  nnoremap <leader>w :StripWhitespace<cr>
+  nnoremap <leader>ws :ToggleStripWhitespaceOnSave<cr>
+
   " indentline
   nnoremap <leader>f :IndentLinesToggle<cr>
   "let g:indentLine_char = '︙'
