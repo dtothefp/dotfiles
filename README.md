@@ -7,6 +7,8 @@ run `make`
 
 All should work beautifully except you will have to `cd` into YouCompleteMe vim bundle and compile. Beware: This can be a horrible experience if your vim/local machine is using brew python.
 
+Instructions Gist, same as below: https://gist.github.com/dtothefp/a9bc996f9e0450b1dc23
+
 ```sh
 ## Most importantly change your keybindings
 # system preferences > keyboard >modifier keys => map caps lock to ctrl for all devices you use, i.e. laptop, external keypboard
