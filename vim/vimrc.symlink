@@ -27,6 +27,7 @@ Bundle 'myusuf3/numbers.vim'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 
 " General Programming
+Bundle 'mxw/vim-jsx'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdcommenter'
@@ -246,6 +247,11 @@ nnoremap N Nzzzv
 """""""""""""""""
 """"""""PLUGINS
 """""""""""""""""
+"JSX
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+"Syntastic
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Ultisnip
 "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
