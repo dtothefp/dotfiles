@@ -19,7 +19,9 @@ Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Raimondi/delimitMate'
 "Bundle 'Lokaltog/vim-powerline'
+Bundle 'heavenshell/vim-jsdoc'
 Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 Bundle 'ntpeters/vim-better-whitespace'
 Bundle 'godlygeek/csapprox'
 Bundle 'flazz/vim-colorschemes'
@@ -27,6 +29,7 @@ Bundle 'myusuf3/numbers.vim'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 
 " General Programming
+Bundle 'leafgarland/typescript-vim'
 Bundle 'mxw/vim-jsx'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
@@ -47,6 +50,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'mkitt/tabline.vim'
 Bundle 'gcmt/taboo.vim'
+" Bundle 'JamshedVesuna/vim-markdown-preview'
 
 "let g:ycm_path_to_python_interpreter = '/Users/dfox-powell/dev/optimizely/optimizely/out/python'
 
@@ -247,6 +251,10 @@ nnoremap N Nzzzv
 """""""""""""""""
 """"""""PLUGINS
 """""""""""""""""
+"JSDoc
+" nmap <silent> <C-l> <Plug>(jsdoc)
+" nmap <silent> <C-l> <Plug>(jsdoc)
+
 "Commenter
 let g:NERDSpaceDelims = 1
 
@@ -319,6 +327,10 @@ let g:ctrlp_user_command = {
       \ },
       \ 'fallback': 'find %s -type f'
       \ }
+
+" markdown_preview
+" let vim_markdown_preview_hotkey='<C-r>'
+" let vim_markdown_preview_github=1
 
 " Tabularize {
 nmap <Leader>a& :Tabularize /&<CR>

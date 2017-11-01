@@ -25,11 +25,8 @@ $(vundle): $(vim_bundle_dir)
 
 $(vimrc): symlinks
 
-reattach-to-user-namespace: $(brew)
+reattach-to-user-namespace:
 	brew install reattach-to-user-namespace
 
-$(brew):
-	ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-
-$(tmux): $(brew) reattach-to-user-namespace
+$(tmux): reattach-to-user-namespace
 	brew install tmux

@@ -6,25 +6,17 @@ set -g default-terminal screen-256color
 set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
 # Mouse
-set -g mode-mouse on
-setw -g mouse-select-window on
-setw -g mouse-select-pane on
+set -g mouse on
 
 # toggle mouse mode to allow mouse copy/paste
 # set mouse on with prefix m
 bind m \
-    set -g mode-mouse on \;\
-    set -g mouse-resize-pane on \;\
-    set -g mouse-select-pane on \;\
-    set -g mouse-select-window on \;\
+    set -g mouse on \;\
     display 'Mouse: ON'
 
 # set mouse off with prefix M
 bind M \
-    set -g mode-mouse off \;\
-    set -g mouse-resize-pane off \;\
-    set -g mouse-select-pane off \;\
-    set -g mouse-select-window off \;\
+    set -g mouse off \;\
     display 'Mouse: OFF'
 
 # Keep your finger on ctrl, or don't
@@ -173,8 +165,10 @@ bind , command-prompt "rename-window '%%'"
 # Use vi keybindings in copy and choice modes -- better perfomance with tmux yank plugin
 setw -g mode-keys vi #required to speedup tmux copy cat plugin
 bind ` copy-mode #go into vi copy mode
-bind -t vi-copy v begin-selection #without this must use <space> bar to enter visual mode
-bind -t vi-copy y copy-selection
+bind-key -Tcopy-mode-vi 'v' send -X begin-selection
+bind-key -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel pbcopy
+# bind -t vi-copy v begin-selection #without this must use <space> bar to enter visual mode
+# bind -t vi-copy y copy-selection
 
 ##########Copy and Paste sucks in tmux, I eliminated all this with the tmux yank plugin####
 ##########Mess around with a combo of these commands
