@@ -24,9 +24,3 @@ $(vundle): $(vim_bundle_dir)
 	git clone http://github.com/gmarik/Vundle.vim.git $(vundle)
 
 $(vimrc): symlinks
-
-reattach-to-user-namespace:
-	brew install reattach-to-user-namespace
-
-$(tmux): reattach-to-user-namespace
-	brew install tmux

@@ -1,35 +1,22 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# added by travis gem
+[ -f /Users/davidfox-powell/.travis/travis.sh ] && source /Users/davidfox-powell/.travis/travis.sh
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+source ~/.zshrc.user
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/dfox.powell/bin:/local/local/sbin:$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
-
-export EDITOR='vim'
-export NVM_DIR="$HOME/.nvm"
-export GIT_EDITOR=vim
-export NPM_CONFIG_REGISTRY="https://artifactory.service.hyperlooptech.la/artifactory/api/npm/npm/"
-export DOCKER_USER=SystemsRegistry
-export DOCKER_PASS=Y=+N++ct8C==FRapu10U/ycrndsrdh46
-export DOCKER_REG=systemsregistry.azurecr.io
-export AZURE_STORAGE_ACCESS_KEY=lq8HmCoThkPqz3yP4zDn4+bhApG++HFw0QfQ6ErlfKVDOZuiz+Em7ZEWA9hbX9zKFrU70qoBN/cwV95e6+EAnA==
-export JFROG_PASSWORD=password
-
-alias rmall="nvm use && rm -rf node_modules && npm cache clean && npm config set progress=false && npm i && npm config set progress=true"
-alias rmyarn="rm -rf node_modules && rm -rf yarn.lock && yarn cache clean && yarn"
-alias tmn="tmux new -s DTOTHEFP -n HipsterSh\#\%"
-alias tmk="tmux kill-session"
-alias btreset="sudo kextunload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport && sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport"
-alias k="kubectl"
-
-ulimit -n 10240
-
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use  # This loads nvm
+export NVM_DIR="/Users/davidfox-powell/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm use
+
+
+export PATH="$HOME/.yarn/bin:$PATH"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/davidfox-powell/dev/casper/night-owl/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/davidfox-powell/dev/casper/night-owl/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/davidfox-powell/dev/casper/night-owl/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/davidfox-powell/dev/casper/night-owl/node_modules/tabtab/.completions/sls.zsh
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/davidfox-powell/dev/casper/night-owl/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/davidfox-powell/dev/casper/night-owl/node_modules/tabtab/.completions/slss.zsh

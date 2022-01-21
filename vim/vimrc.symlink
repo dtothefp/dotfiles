@@ -27,6 +27,7 @@ Bundle 'godlygeek/csapprox'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'Glench/Vim-Jinja2-Syntax'
+Bundle 'fgsch/vim-varnish'
 
 " General Programming
 Bundle 'leafgarland/typescript-vim'
@@ -41,13 +42,13 @@ Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'mattn/emmet-vim'
 Bundle 'kchmck/vim-coffee-script'
 "Bundle 'Shougo/neocomplete.vim'
+Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'Yggdroot/indentLine'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
-Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'mkitt/tabline.vim'
 Bundle 'gcmt/taboo.vim'
 " Bundle 'JamshedVesuna/vim-markdown-preview'
@@ -159,6 +160,7 @@ set softtabstop=2               " Let backspace delete indent
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 "python specific setting
 au Filetype python setl et ts=4 sw=4
+au Filetype vcl setl et ts=2 sw=2
 
 " }
 
